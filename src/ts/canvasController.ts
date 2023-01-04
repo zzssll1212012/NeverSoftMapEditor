@@ -1,10 +1,10 @@
 import DrawTools from "../ts/view/drawTools";
-import GridManager from "../ts/data/gridManager";
+import GridManager from "./data/GridManager";
 import RendererTools from "../ts/view/renderer";
-import BrushTools from "../ts/data/brushTools";
+import BrushTools from "./data/BrushTools";
 import { Tool } from "../ts/data/ToolType";
 import MapStack from "../ts/data/mapStack";
-import CacheMap from "../ts/data/cacheMap";
+import CacheMap from "./data/CacheMap";
 import type Grid from "../ts/data/VO/Grid";
 import type StartAndEndPos from "../ts/data/VO/StartAndEndPos";
 import type { Store } from "vuex";
@@ -26,22 +26,26 @@ export function canvasController(
   // 取得画布
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   // 设置网格的行列
-  const _gridColSize = $store.state.canvasColSize;
-  const _gridRowSize = $store.state.canvasRowSize;
+  const _gridColSize = $store.state.canvasColSize + 2;
+  const _gridRowSize = $store.state.canvasRowSize + 2;
 
-  let _space = 0;
+  let _space = GridManager.space;
+  canvas.height = _space * (_gridRowSize);
+  canvas.width = _space * (_gridColSize);
 
-  if (_gridColSize > _gridRowSize) {
-    // 宽度不变，主要是高度会改变（取屏幕的五分之三）
-    _space = Math.ceil((document.body.clientWidth * 3) / 5 / _gridColSize);
-    canvas.height = _space * _gridRowSize;
-    canvas.width = _space * _gridColSize;
-  } else {
-    // 取屏幕的五分之四
-    _space = Math.ceil((document.body.clientHeight * 4) / 5 / _gridRowSize);
-    canvas.height = _space * _gridRowSize;
-    canvas.width = _space * _gridColSize;
-  }
+  console.log(canvas.height);
+  console.log(canvas.width);
+  // if (_gridColSize > _gridRowSize) {
+  //   // 宽度不变，主要是高度会改变（取屏幕的五分之三）
+  //   _space = Math.ceil((document.body.clientWidth * 3) / 5 / _gridColSize);
+  //   canvas.height = _space * _gridRowSize;
+  //   canvas.width = _space * _gridColSize;
+  // } else {
+  //   // 取屏幕的五分之四
+  //   _space = Math.ceil((document.body.clientHeight * 4) / 5 / _gridRowSize);
+  //   canvas.height = _space * _gridRowSize;
+  //   canvas.width = _space * _gridColSize;
+  // }
 
   let currentTool = Tool.DRAW;
   let currentLayer = 0;
@@ -63,7 +67,7 @@ export function canvasController(
     ctx,
     _space,
     canvas.width,
-    _space * _gridRowSize,
+    canvas.height,
     _gridColSize,
     _gridRowSize
   );
@@ -175,6 +179,16 @@ export function canvasController(
   canvas.onmousedown = e => {
     const tempX = Math.floor(e.offsetY / _space);
     const tempY = Math.floor(e.offsetX / _space);
+
+    // 如果超出屏幕则直接返回
+    if (
+      tempY > _gridColSize - 2 ||
+      tempX > _gridRowSize - 2 ||
+      tempX <= 0 ||
+      tempY <= 0
+    ) {
+      return;
+    }
 
     // 入栈时必须加上当前的 Layer
     recallMap.push({
@@ -338,10 +352,10 @@ export function canvasController(
 
     // 如果超出屏幕则直接返回
     if (
-      tempY > _gridColSize - 1 ||
-      tempX > _gridRowSize - 1 ||
-      tempX < 0 ||
-      tempY < 0
+      tempY > _gridColSize - 2 ||
+      tempX > _gridRowSize - 2 ||
+      tempX <= 0 ||
+      tempY <= 0
     ) {
       return;
     }

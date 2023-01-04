@@ -1,5 +1,5 @@
 <template>
-  <div id="showType">
+  <!-- <div id="showType">
     <div class="title">图层</div>
     <br />
     <input id="Background" type="radio" name="layerRadio" checked="true" value="0" v-model="layer" />
@@ -13,7 +13,7 @@
 
     <input type="radio" id="foreground" name="layerRadio" value="3" v-model="layer" />
     <label for="foreground">foreground</label>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">

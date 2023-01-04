@@ -43,11 +43,11 @@
   <el-dialog title="TileMap Setting" v-model="dialogVisible" width="325px" @closed="closeDialogVisible">
     <div class="c-input">
       <label for="c-width">宽 (格子数)</label>
-      <el-input-number id="c-width" v-model="tempCols" controls-position="right" :min="10" :max="50"></el-input-number>
+      <el-input-number id="c-width" v-model="tempCols" controls-position="right" :min="4" :max="100"></el-input-number>
     </div>
     <div class="c-input">
       <label for="c-height">高 (格子数)</label>
-      <el-input-number id="c-height" v-model="tempRows" controls-position="right" :min="10" :max="50"></el-input-number>
+      <el-input-number id="c-height" v-model="tempRows" controls-position="right" :min="4" :max="100"></el-input-number>
     </div>
     <template #footer>
       <span class="dialog-footer">

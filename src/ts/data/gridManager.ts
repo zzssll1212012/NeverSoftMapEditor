@@ -10,6 +10,7 @@ export default class GridManager {
   private map: Grid[][];
   private cols: number;
   private rows: number;
+  public static space: number = 50;
 
   /**
    *

@@ -6,9 +6,9 @@
 
 import type StartAndEndPos from "../data/VO/StartAndEndPos";
 import type TileManager from "../data/TileManager";
-import type GridManager from "../data/gridManager";
+import type GridManager from "../data/GridManager";
 import DrawTools from "./drawTools";
-import type CacheMap from "../data/cacheMap";
+import type CacheMap from "../data/CacheMap";
 import type BasePos from "../data/VO/BasePos";
 
 export default class RendererTools {
@@ -67,7 +67,6 @@ export default class RendererTools {
   ): void {
     // 局部刷新
     const modif = cacheMap.getChange();
-
     for (let i = 0; i < modif.length; i++) {
       // 先清空指定的位置
       DrawTools.clearTile(
@@ -116,7 +115,7 @@ export default class RendererTools {
       gridManagerArray[0].getGrid(flag.end.x, flag.end.y).y
     );
 
-    DrawTools.drawGrid(ctx, space, canvas.width, space * rows, cols, rows);
+    DrawTools.drawGrid(ctx, space, canvas.width, canvas.height, cols, rows);
   }
 
   /**

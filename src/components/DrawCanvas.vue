@@ -8,7 +8,7 @@
 import { onMounted, defineComponent } from "vue";
 import { useStore } from "vuex";
 
-import type GridManager from "../ts/data/gridManager";
+import type GridManager from "../ts/data/GridManager";
 import Grid from "../ts/data/VO/Grid";
 import StartAndEndPos from "../ts/data/VO/StartAndEndPos";
 

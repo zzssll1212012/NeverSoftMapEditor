@@ -12,7 +12,7 @@ import { onMounted, defineComponent } from "vue";
 import { useStore } from "vuex";
 
 import DrawTools from "../ts/view/drawTools";
-import GridManager from "../ts/data/gridManager";
+import GridManager from "../ts/data/GridManager";
 import TileManager from "../ts/data/TileManager";
 import BasePos from "../ts/data/VO/BasePos";
 

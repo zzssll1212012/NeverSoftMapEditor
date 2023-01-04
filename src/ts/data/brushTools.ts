@@ -4,9 +4,9 @@
  * @author alsritter(alsritter1@gmail.com)
  */
 
-import type GridManager from "./gridManager";
+import type GridManager from "./GridManager";
 import type TileManager from "./TileManager";
-import type CacheMap from "./cacheMap";
+import type CacheMap from "./CacheMap";
 import type StartAndEndPos from "./VO/StartAndEndPos";
 
 export default class BrushTools {

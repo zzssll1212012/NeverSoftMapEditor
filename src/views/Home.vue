@@ -3,7 +3,7 @@
     <el-header>
       <HeaderMenu />
     </el-header>
-    <el-container>
+    <el-main>
       <el-aside :width="detailWidth + 'px'">
         <TileCanvas />
         <br />
@@ -16,7 +16,7 @@
           <ToolsCard />
         </el-affix>
       </el-main>
-    </el-container>
+    </el-main>
   </el-container>
 </template>
 
@@ -124,7 +124,8 @@ export default defineComponent({
     display: flex;
     display: -webkit-flex;
     // justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    height: 100%;
   }
 
   #resize {
@@ -136,7 +137,7 @@ export default defineComponent({
   .el-affix {
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
   }
 }
 </style>

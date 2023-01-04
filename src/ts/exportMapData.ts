@@ -6,7 +6,7 @@
 
 // import { getMapData, getStartAndEndPos } from "./canvasController";
 import BasePos from "./data/VO/BasePos";
-import type GridManager from "../ts/data/gridManager";
+import type GridManager from "./data/GridManager";
 import type StartAndEndPos from "../ts/data/VO/StartAndEndPos";
 
 /**

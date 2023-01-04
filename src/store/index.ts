@@ -3,7 +3,7 @@ import BasePos from "../ts/data/VO/BasePos";
 import { Tool } from "../ts/data/ToolType";
 import { Layer } from "../ts/data/LayerType";
 
-import type GridManager from "../ts/data/gridManager";
+import type GridManager from "../ts/data/GridManager";
 import Grid from "../ts/data/VO/Grid";
 import StartAndEndPos from "../ts/data/VO/StartAndEndPos";
 

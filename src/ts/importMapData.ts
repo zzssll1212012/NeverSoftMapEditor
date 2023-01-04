@@ -4,7 +4,7 @@
  * @author alsritter(alsritter1@gmail.com)
  */
 
-import GridManager from "./data/gridManager";
+import GridManager from "./data/GridManager";
 import StartAndEndPos from "./data/VO/StartAndEndPos";
 import Grid from "./data/VO/Grid";
 import BasePos from "./data/VO/BasePos";
@@ -96,7 +96,9 @@ export function importData(
       newMap.push(
         constructData(data.sprites, data.collision, _space, cols, rows)
       );
-      newMap.push(constructData(data.sprites, data.traps, _space, cols, rows));
+      newMap.push(
+        constructData(data.sprites, data.traps, _space, cols, rows)
+      );
       newMap.push(
         constructData(data.sprites, data.foreground, _space, cols, rows)
       );

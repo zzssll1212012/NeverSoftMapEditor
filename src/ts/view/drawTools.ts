@@ -4,7 +4,7 @@
  * @author alsritter(alsritter1@gmail.com)
  */
 
-import type GridManager from "../data/gridManager";
+import type GridManager from "../data/GridManager";
 import type TileManager from "../data/TileManager";
 
 export default class DrawTools {
@@ -26,29 +26,61 @@ export default class DrawTools {
     gridWithSize: number,
     gridHeightSize: number
   ): void {
+    let gw: number = gridWithSize;
+    let gh: number = gridHeightSize;
+
     // 采用遍历的方式，绘画x轴的线条
-    for (let i = 0; i < gridWithSize; i++) {
+    for (let i = 0; i < gw; i++) {
+      if (i != 0 && i != gw - 1) {
+        ctx.beginPath();
+        ctx.font = '28px serif';// 设置字体大小
+        let textWidth = ctx.measureText((i - 1).toString()).width;
+        let fix = ctx.measureText((i - 1).toString()).actualBoundingBoxAscent + ctx.measureText((i - 1).toString()).actualBoundingBoxDescent;
+        ctx.fillText((i - 1).toString(), space * (i + 0.5) - textWidth / 2, space / 2 + fix / 2);// 绘制 "实心" 文字
+        ctx.beginPath();
+        ctx.fillText((i - 1).toString(), space * (i + 0.5) - textWidth / 2, height - space + space / 2 + fix / 2);// 绘制 "实心" 文字
+      }
+
       ctx.beginPath(); // 开启路径，设置不同的样式
-      ctx.moveTo(space * i - 0.5, 0); // -0.5是为了解决像素模糊问题
-      ctx.lineTo(space * i - 0.5, height);
-      ctx.setLineDash([1, 2]); //绘制虚线
-      ctx.strokeStyle = "#2a2a2a"; // 设置每个线条的颜色
+      ctx.moveTo(space * i - 0.5, space); // -0.5是为了解决像素模糊问题
+      ctx.lineTo(space * i - 0.5, height - space);
+      if ((gw % 2 == 0 && (i == gw / 2)) || (gw % 2 == 1 && ((i == Math.floor(gw / 2)) || (i == Math.floor(gw / 2) + 1)))) {
+        ctx.setLineDash([2, 1, 4]); //绘制虚线
+      } else {
+        ctx.strokeStyle = "#2a2a2a"; // 设置每个线条的颜色
+        ctx.setLineDash([1, 2]); //绘制虚线
+      }
       ctx.stroke();
     }
 
     // 同理y轴
-    for (let i = 0; i < gridHeightSize; i++) {
+    for (let i = 0; i < gh; i++) {
+      if (i != 0 && i != gh - 1) {
+        ctx.beginPath();
+        ctx.font = '28px serif';// 设置字体大小
+        let textWidth = ctx.measureText((gh - i - 2).toString()).width;
+        let fix = ctx.measureText((gh - i - 2).toString()).actualBoundingBoxAscent + ctx.measureText((gh - i - 2).toString()).actualBoundingBoxDescent;
+        ctx.fillText((gh - i - 2).toString(), 25 - textWidth / 2, space * (i + 0.5) + fix / 2);// 绘制 "实心" 文字
+        ctx.beginPath();
+        ctx.fillText((gh - i - 2).toString(), width - space + 25 - textWidth / 2, space * (i + 0.5) + fix / 2);// 绘制 "实心" 文字
+      }
+
       ctx.beginPath(); // 开启路径，设置不同的样式
-      ctx.moveTo(0, space * i - 0.5);
-      ctx.lineTo(width, space * i - 0.5);
-      ctx.strokeStyle = "#2a2a2a";
+      ctx.moveTo(space, space * i - 0.5);
+      ctx.lineTo(width - space, space * i - 0.5);
+      if ((gh % 2 == 0 && (i == gh / 2)) || (gh % 2 == 1 && ((i == Math.floor(gh / 2)) || (i == Math.floor(gh / 2) + 1)))) {
+        ctx.setLineDash([2, 1, 4]); //绘制虚线
+      } else {
+        ctx.strokeStyle = "#2a2a2a"; // 设置每个线条的颜色
+        ctx.setLineDash([1, 2]); //绘制虚线
+      }
       ctx.stroke();
     }
   }
 
   /**
    * 让指定的位置变暗
-   *
+   *-
    * @param {CanvasRenderingContext2D} ctx 传入 canvas 的 Context
    * @param {Number} space 一个格子的大小
    * @param {Number} x 绘制目的地的 x
