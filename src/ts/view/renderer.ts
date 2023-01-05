@@ -68,6 +68,9 @@ export default class RendererTools {
     // 局部刷新
     const modif = cacheMap.getChange();
     for (let i = 0; i < modif.length; i++) {
+      if (!gridManagerArray[layer].getGrid(modif[i].x, modif[i].y)) {
+        continue;
+      }
       // 先清空指定的位置
       DrawTools.clearTile(
         ctx,
@@ -106,14 +109,14 @@ export default class RendererTools {
     // 更新完成后要归零
     cacheMap.cleanChange();
 
-    RendererTools.drawStartAndEnd(
-      ctx,
-      space,
-      gridManagerArray[0].getGrid(flag.start.x, flag.start.y).x,
-      gridManagerArray[0].getGrid(flag.start.x, flag.start.y).y,
-      gridManagerArray[0].getGrid(flag.end.x, flag.end.y).x,
-      gridManagerArray[0].getGrid(flag.end.x, flag.end.y).y
-    );
+    // RendererTools.drawStartAndEnd(
+    //   ctx,
+    //   space,
+    //   gridManagerArray[0].getGrid(flag.start.x, flag.start.y).x,
+    //   gridManagerArray[0].getGrid(flag.start.x, flag.start.y).y,
+    //   gridManagerArray[0].getGrid(flag.end.x, flag.end.y).x,
+    //   gridManagerArray[0].getGrid(flag.end.x, flag.end.y).y
+    // );
 
     DrawTools.drawGrid(ctx, space, canvas.width, canvas.height, cols, rows);
   }

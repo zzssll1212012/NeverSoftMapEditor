@@ -31,8 +31,11 @@ export default class DrawTools {
 
     // 采用遍历的方式，绘画x轴的线条
     for (let i = 0; i < gw; i++) {
+      ctx.clearRect(space * i, 0, space, space);
+      ctx.clearRect(space * i, height - space, space, space);
       if (i != 0 && i != gw - 1) {
         ctx.beginPath();
+        ctx.strokeStyle = "#000000"; // 设置颜色
         ctx.font = '28px serif';// 设置字体大小
         let textWidth = ctx.measureText((i - 1).toString()).width;
         let fix = ctx.measureText((i - 1).toString()).actualBoundingBoxAscent + ctx.measureText((i - 1).toString()).actualBoundingBoxDescent;
@@ -45,18 +48,21 @@ export default class DrawTools {
       ctx.moveTo(space * i - 0.5, space); // -0.5是为了解决像素模糊问题
       ctx.lineTo(space * i - 0.5, height - space);
       if ((gw % 2 == 0 && (i == gw / 2)) || (gw % 2 == 1 && ((i == Math.floor(gw / 2)) || (i == Math.floor(gw / 2) + 1)))) {
-        ctx.setLineDash([2, 1, 4]); //绘制虚线
+        ctx.setLineDash([8, 1]); //绘制虚线
       } else {
         ctx.strokeStyle = "#2a2a2a"; // 设置每个线条的颜色
-        ctx.setLineDash([1, 2]); //绘制虚线
+        ctx.setLineDash([1, 4]); //绘制虚线
       }
       ctx.stroke();
     }
 
     // 同理y轴
     for (let i = 0; i < gh; i++) {
+      ctx.clearRect(0, space * i, space, space);
+      ctx.clearRect(width - space, space * i, space, space);
       if (i != 0 && i != gh - 1) {
         ctx.beginPath();
+        ctx.strokeStyle = "#000000"; // 设置颜色
         ctx.font = '28px serif';// 设置字体大小
         let textWidth = ctx.measureText((gh - i - 2).toString()).width;
         let fix = ctx.measureText((gh - i - 2).toString()).actualBoundingBoxAscent + ctx.measureText((gh - i - 2).toString()).actualBoundingBoxDescent;
@@ -69,7 +75,7 @@ export default class DrawTools {
       ctx.moveTo(space, space * i - 0.5);
       ctx.lineTo(width - space, space * i - 0.5);
       if ((gh % 2 == 0 && (i == gh / 2)) || (gh % 2 == 1 && ((i == Math.floor(gh / 2)) || (i == Math.floor(gh / 2) + 1)))) {
-        ctx.setLineDash([2, 1, 4]); //绘制虚线
+        ctx.setLineDash([8, 1]); //绘制虚线
       } else {
         ctx.strokeStyle = "#2a2a2a"; // 设置每个线条的颜色
         ctx.setLineDash([1, 2]); //绘制虚线

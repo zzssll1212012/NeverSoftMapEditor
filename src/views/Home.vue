@@ -7,7 +7,7 @@
       <el-aside :width="detailWidth + 'px'">
         <TileCanvas />
         <br />
-        <LayerSelect />
+        <MapMessage />
       </el-aside>
       <div id="resize" ref="resize"></div>
       <el-main>
@@ -29,6 +29,7 @@ import DrawCanvas from "../components/DrawCanvas.vue";
 import LayerSelect from "../components/LayerSelect.vue";
 import HeaderMenu from "../components/HeaderMenu.vue";
 import ToolsCard from "../components/ToolsCard.vue";
+import MapMessage from "../components/MapMessage.vue";
 
 export default defineComponent({
   components: {
@@ -36,7 +37,8 @@ export default defineComponent({
     DrawCanvas,
     LayerSelect,
     HeaderMenu,
-    ToolsCard
+    ToolsCard,
+    MapMessage
   },
   setup() {
     const resize = ref<HTMLDivElement>();

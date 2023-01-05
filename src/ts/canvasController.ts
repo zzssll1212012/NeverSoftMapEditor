@@ -33,20 +33,6 @@ export function canvasController(
   canvas.height = _space * (_gridRowSize);
   canvas.width = _space * (_gridColSize);
 
-  console.log(canvas.height);
-  console.log(canvas.width);
-  // if (_gridColSize > _gridRowSize) {
-  //   // 宽度不变，主要是高度会改变（取屏幕的五分之三）
-  //   _space = Math.ceil((document.body.clientWidth * 3) / 5 / _gridColSize);
-  //   canvas.height = _space * _gridRowSize;
-  //   canvas.width = _space * _gridColSize;
-  // } else {
-  //   // 取屏幕的五分之四
-  //   _space = Math.ceil((document.body.clientHeight * 4) / 5 / _gridRowSize);
-  //   canvas.height = _space * _gridRowSize;
-  //   canvas.width = _space * _gridColSize;
-  // }
-
   let currentTool = Tool.DRAW;
   let currentLayer = 0;
   let isShowAll = true;
@@ -349,7 +335,6 @@ export function canvasController(
   canvas.onmousemove = e => {
     const tempX = Math.floor(e.offsetY / _space);
     const tempY = Math.floor(e.offsetX / _space);
-
     // 如果超出屏幕则直接返回
     if (
       tempY > _gridColSize - 2 ||

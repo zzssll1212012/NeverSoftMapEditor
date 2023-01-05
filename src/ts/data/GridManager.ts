@@ -42,6 +42,12 @@ export default class GridManager {
    * @returns {Grid} 返回 Grid
    */
   getGrid(x: number, y: number): Grid {
+    // console.log("=================================");
+    // console.log(this.map.length, this.map[0].length);
+    // console.log(x, y);
+    if (x >= this.map.length || y >= this.map[0].length) {
+      return null!;
+    }
     return this.map[x][y];
   }
 
